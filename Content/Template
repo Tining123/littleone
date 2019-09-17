@@ -1,0 +1,27 @@
+类注释模板
+/**
+*@ClassName ${NAME}
+*@Description
+*@Author Tining
+*@data ${DATE} ${TIME}
+*@Version 1.0
+**/
+
+方法注释模板
+*
+*@Author Tining
+*@Description $end$
+*@Date $time$ $date$
+*@Param $param$
+*@return $return$
+**/
+
+接口注释模板
+/**
+*@InterfaceName ${NAME}
+*@Description
+*@Author Tining
+*@data ${DATE} ${TIME}
+*@Version 1.0
+**/
+
