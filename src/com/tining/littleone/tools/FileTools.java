@@ -2,10 +2,7 @@ package com.tining.littleone.tools;
 
 import com.tining.littleone.tools.log.Log;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 
 /**
  * @ClassName FileTools
@@ -53,7 +50,7 @@ public class FileTools extends Tools{
 
     /*
     *@Author Tining
-    *@Description 写字符串到文件中
+    *@Description 写字符串到文件中，如果没有，则创建文件，这将会复写文件
     *@Date 2019/9/18 1:05
     *@Param [text, path]
     *@return void
@@ -71,6 +68,33 @@ public class FileTools extends Tools{
         }
         try {
             fw = new FileWriter(file);
+            fw.write(text);
+        }catch (Exception e){
+            log.log(e);
+        }
+    }
+
+    /*
+     *@Author Tining
+     *@Description 追加写字符串到文件中，如果没有，则创建文件
+     *@Date 2019/9/18 1:05
+     *@Param [text, path]
+     *@return void
+     **/
+    public static void writeAppend(String text,String path){
+        File file = new File(path);
+        FileWriter fw;
+        BufferedWriter bw;
+        //测试文件是否存在,如果不存在则创建
+        if(!file.exists()) {
+            try {
+                file.createNewFile();
+            }catch (Exception e){
+                log.log(e);
+            }
+        }
+        try {
+            fw = new FileWriter(file,true);
             fw.write(text);
         }catch (Exception e){
             log.log(e);
