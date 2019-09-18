@@ -7,5 +7,5 @@ package com.tining.littleone.tools;
  * @data 2019/9/18 0:35
  * @Version 1.0
  **/
-public class StringTools implements Tools {
+public class StringTools extends Tools{
 }

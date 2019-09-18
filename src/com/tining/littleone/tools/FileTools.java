@@ -14,7 +14,7 @@ import java.io.FileWriter;
  * @data 2019/9/18 0:35
  * @Version 1.0
  **/
-public class FileTools implements Tools {
+public class FileTools extends Tools{
 
     ///日志纪录类
     public static Log log;
@@ -56,10 +56,11 @@ public class FileTools implements Tools {
     *@Description 写字符串到文件中
     *@Date 2019/9/18 1:05
     *@Param [text, path]
-    *@return java.lang.String
+    *@return void
     **/
-    public static String write(String text,String path){
+    public static void write(String text,String path){
         File file = new File(path);
+        FileWriter fw;
         //测试文件是否存在,如果不存在则创建
         if(!file.exists()) {
             try {
@@ -69,7 +70,8 @@ public class FileTools implements Tools {
             }
         }
         try {
-            FileWriter fw = new FileWriter(file);
+            fw = new FileWriter(file);
+            fw.write(text);
         }catch (Exception e){
             log.log(e);
         }
