@@ -10,6 +10,51 @@ import java.util.ArrayList;
  * @Version 1.0
  **/
 public class StringTools extends Tools{
+
+    /*
+    *@Author Tining
+    *@Description 清除list中的空白行和每一行前后空白
+    *@Date 2019/9/26 3:12 
+    *@Param [list]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
+    public static ArrayList<String> cleanList(ArrayList<String> list){
+        list = trimList(list);
+        list = cleanBlankLine(list);
+        return list;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 清除list中每一项的前后空白
+    *@Date 2019/9/26 3:04 
+    *@Param [list]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
+    public static ArrayList<String> trimList(ArrayList<String> list){
+        for(int i = 0 ; i< list.size();i++)
+        {list.set(i,list.get(i).trim());}
+        return list;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 清除list中的空白项
+    *@Date 2019/9/26 2:59 
+    *@Param [list]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
+    public static ArrayList<String> cleanBlankLine(ArrayList<String> list){
+        for(int i = 0;i<list.size();i++){
+            if(list.get(i).trim().length() == 0)
+            {
+                list.remove(i);
+                i--;
+            }
+        }
+        return list;
+    }
+
     /*
     *@Author Tining
     *@Description 把字符串按行转成list

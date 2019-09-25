@@ -55,23 +55,21 @@ public class FileTools extends Tools{
     *@Param [text, path]
     *@return void
     **/
-    public static void write(String text,String path){
+    public static boolean write(String text,String path){
         File file = new File(path);
         FileWriter fw;
         //测试文件是否存在,如果不存在则创建
-        if(!file.exists()) {
-            try {
-                file.createNewFile();
-            }catch (Exception e){
-                log.log(e);
-            }
-        }
         try {
+            if(!file.exists()) {
+                    file.createNewFile();
+            }
             fw = new FileWriter(file);
             fw.write(text);
         }catch (Exception e){
             log.log(e);
+            return false;
         }
+        return true;
     }
 
     /*
@@ -81,7 +79,7 @@ public class FileTools extends Tools{
      *@Param [text, path]
      *@return void
      **/
-    public static void writeAppend(String text,String path){
+    public static boolean writeAppend(String text,String path){
         File file = new File(path);
         FileWriter fw;
         BufferedWriter bw;
@@ -91,6 +89,7 @@ public class FileTools extends Tools{
                 file.createNewFile();
             }catch (Exception e){
                 log.log(e);
+                return false;
             }
         }
         try {
@@ -98,6 +97,14 @@ public class FileTools extends Tools{
             fw.write(text);
         }catch (Exception e){
             log.log(e);
+            return false;
         }
+        return true;
+    }
+
+    public static boolean renameFile(String name, String newName){
+        File file = new File(name);
+        File newFile = new File(newName);
+        return file.renameTo(newFile);
     }
 }
