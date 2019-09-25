@@ -1,12 +1,50 @@
 package com.tining.littleone.tools.log;
 
 public abstract class Log {
-    ///默认消息等级
-    public int defaultLevel = 0;
+    ///默认消息记录等级
+    protected int defaultLevel = 0;
+
+    ///默认消息规模限制
+    protected int limit = 500;
+
+    ///默认消息等级顺序反馈
+    protected boolean isOrderLevel = true;
+
+    ///默认消息多层反馈模式
+    protected boolean isLayerModel = true;
+
+    ///默认消息反馈等级
+    protected int defaultReadLevel = 0;
+    /*
+     *@Author Tining
+     *@Description 设置是否等级顺序反馈
+     *@Date 2019/9/19 22:32
+     *@Param void
+     *@return int
+     **/
+    public void setOrderLevel(boolean isOrderLevel){this.isOrderLevel = isOrderLevel;}
+
+    /*
+     *@Author Tining
+     *@Description 返回消息规模限制
+     *@Date 2019/9/19 22:32
+     *@Param void
+     *@return int
+     **/
+    public int getLimit(){return this.limit;}
+
+    /*
+     *@Author Tining
+     *@Description 设置消息规模限制
+     *@Date 2019/9/19 22:32
+     *@Param int
+     *@return void
+     **/
+    public void setLimit(int limit){this.limit = limit;}
 
     /*
     *@Author Tining
-    *@Description 返回默认消费等级
+    *@Description 返回默认消息等级
     *@Date 2019/9/19 22:32
     *@Param []
     *@return int
@@ -47,7 +85,7 @@ public abstract class Log {
      *@Param [obj]
      *@return void
      **/
-    public abstract void log(Exception e);
+    public void log(Exception e){e.printStackTrace();}
 
     /*
      *@Author Tining
@@ -66,4 +104,22 @@ public abstract class Log {
      *@return void
      **/
     public abstract void log(String msg, int msgLevel);
+
+    /*
+     *@Author Tining
+     *@Description 返回当前日志规模
+     *@Date 2019/9/18 1:47
+     *@Param void
+     *@return String
+     **/
+    public abstract String getSize();
+
+    /*
+     *@Author Tining
+     *@Description 修剪当前日志规模
+     *@Date 2019/9/18 1:47
+     *@Param void
+     *@return void
+     **/
+    public abstract void balanceSize();
 }
