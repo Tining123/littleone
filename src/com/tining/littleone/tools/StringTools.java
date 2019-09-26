@@ -11,6 +11,17 @@ import java.util.ArrayList;
  **/
 public class StringTools extends Tools{
 
+    public static String replaceLast(String text, String regex, String replacement) {
+        return text.replaceFirst("(?s)"+regex+"(?!.*?"+regex+")", replacement);
+    }
+
+    public static String cutInner(String begin,String end,String str){
+        int beginindex = str.indexOf(begin);
+        int endindex = str.indexOf(end);
+        String get = str.substring(beginindex+begin.length(),endindex);
+        return get;
+    }
+
     /*
     *@Author Tining
     *@Description 清除list中的空白行和每一行前后空白
@@ -40,13 +51,50 @@ public class StringTools extends Tools{
     /*
     *@Author Tining
     *@Description 清除list中的空白项
-    *@Date 2019/9/26 2:59 
+    *@Date 2019/9/26 2:59
     *@Param [list]
     *@return java.util.ArrayList<java.lang.String>
     **/
     public static ArrayList<String> cleanBlankLine(ArrayList<String> list){
+        return cleanListIs(list," ");
+    }
+
+    public static ArrayList<String> cleanListIsNot(ArrayList<String> list, String str){
         for(int i = 0;i<list.size();i++){
-            if(list.get(i).trim().length() == 0)
+            if(list.get(i).trim() != str.trim())
+            {
+                list.remove(i);
+                i--;
+            }
+        }
+        return list;
+    }
+
+    public static ArrayList<String> cleanListIs(ArrayList<String> list, String str){
+        for(int i = 0;i<list.size();i++){
+            if(list.get(i).trim() == str.trim())
+            {
+                list.remove(i);
+                i--;
+            }
+        }
+        return list;
+    }
+
+    public static ArrayList<String> CleanListWithou(ArrayList<String> list, String str){
+        for(int i = 0;i<list.size();i++){
+            if(!list.get(i).contains(str))
+            {
+                list.remove(i);
+                i--;
+            }
+        }
+        return list;
+    }
+
+    public static ArrayList<String> CleanListWith(ArrayList<String> list, String str){
+        for(int i = 0;i<list.size();i++){
+            if(list.get(i).contains(str))
             {
                 list.remove(i);
                 i--;

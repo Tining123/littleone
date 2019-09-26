@@ -1,4 +1,4 @@
-package com.tining.codetools.getsetgenerator;
+package com.tining.codetools;
 
 import com.tining.littleone.tools.StringTools;
 import com.tining.littleone.tools.TimeTools;
@@ -14,8 +14,13 @@ import java.util.ArrayList;
  **/
 public class GetSetGenerator {
 
-    public static String prefix = "public";
-
+    /*
+    *@Author Tining
+    *@Description
+    *@Date 2019/9/26 0:47
+    *@Param [str]
+    *@return java.lang.String
+    **/
     public static void main(String[] arg){
         String get = "///默认消息规模限制\n" +
                 "    protected int limit = 500;\n" +
