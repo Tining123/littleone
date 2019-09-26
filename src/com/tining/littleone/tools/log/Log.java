@@ -1,5 +1,12 @@
 package com.tining.littleone.tools.log;
 
+/**
+ * @ClassName FileTools
+ * @Description 针对于字符串操作的工具类
+ * @Author Tining
+ * @data 2019/9/18 0:35
+ * @Version 1.0
+ **/
 public abstract class Log {
     ///默认消息记录等级
     protected int defaultLevel = 0;
@@ -15,6 +22,7 @@ public abstract class Log {
 
     ///默认消息反馈等级
     protected int defaultReadLevel = 0;
+
     /*
      *@Author Tining
      *@Description 设置是否等级顺序反馈

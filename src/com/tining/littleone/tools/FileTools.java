@@ -102,6 +102,13 @@ public class FileTools extends Tools{
         return true;
     }
 
+    /*
+    *@Author Tining
+    *@Description 重命名文件
+    *@Date 2019/9/27 0:08 
+    *@Param [name, newName]
+    *@return boolean
+    **/
     public static boolean renameFile(String name, String newName){
         File file = new File(name);
         File newFile = new File(newName);

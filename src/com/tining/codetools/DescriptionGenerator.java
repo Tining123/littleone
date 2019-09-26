@@ -4,7 +4,7 @@ import com.tining.littleone.tools.StringTools;
 import com.tining.littleone.tools.TimeTools;
 
 /**
- * @ClassName GetSetGenerator
+ * @ClassName DescriptionGenerator
  * @Description 注释生成工具
  * @Author Tining
  * @data 2019/9/26 0:24
@@ -12,12 +12,26 @@ import com.tining.littleone.tools.TimeTools;
  **/
 public class DescriptionGenerator {
 
+    /*
+    *@Author Tining
+    *@Description 执行生成
+    *@Date 2019/9/27 0:09
+    *@Param [arg]
+    *@return void
+    **/
     public static void main(String[] arg){
         System.out.println(classDesGenerator(""));
         System.out.println();
         System.out.println(functionDesGenerator("public static String functionDesGenerator(String functionclaim){"));
     }
 
+    /*
+    *@Author Tining
+    *@Description 生成类注释
+    *@Date 2019/9/27 0:09 
+    *@Param [classname]
+    *@return java.lang.String
+    **/
     public static String classDesGenerator(String classname){
         String prefix = "/**\n" +
                 " * @ClassName " + classname + "\n" +
@@ -29,6 +43,13 @@ public class DescriptionGenerator {
         return prefix;
     }
 
+    /*
+    *@Author Tining
+    *@Description 生成函数注释
+    *@Date 2019/9/27 0:09 
+    *@Param [functionclaim]
+    *@return java.lang.String
+    **/
     public static String functionDesGenerator(String functionclaim){
         //取消掉静态符
         functionclaim = functionclaim.replaceAll(" static","");

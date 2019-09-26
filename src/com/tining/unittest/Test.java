@@ -1,8 +1,12 @@
 package com.tining.unittest;
 
 /**
- * Created by a1755057 on 26/09/19.
- */
+ * @ClassName FileTools
+ * @Description 测试用类
+ * @Author Tining
+ * @data 2019/9/18 0:35
+ * @Version 1.0
+ **/
 public class Test {
     public static void main(String[] arg){
 

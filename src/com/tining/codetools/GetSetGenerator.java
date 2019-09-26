@@ -16,7 +16,7 @@ public class GetSetGenerator {
 
     /*
     *@Author Tining
-    *@Description
+    *@Description 执行构造
     *@Date 2019/9/26 0:47
     *@Param [str]
     *@return java.lang.String

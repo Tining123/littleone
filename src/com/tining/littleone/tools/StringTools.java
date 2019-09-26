@@ -11,10 +11,24 @@ import java.util.ArrayList;
  **/
 public class StringTools extends Tools{
 
+    /*
+    *@Author Tining
+    *@Description 替换掉最后一个符合的字符串
+    *@Date 2019/9/26 23:39 
+    *@Param [text, regex, replacement]
+    *@return java.lang.String
+    **/
     public static String replaceLast(String text, String regex, String replacement) {
         return text.replaceFirst("(?s)"+regex+"(?!.*?"+regex+")", replacement);
     }
 
+    /*
+    *@Author Tining
+    *@Description 剪切出符合两端字符串中间的内容
+    *@Date 2019/9/26 23:40 
+    *@Param [begin, end, str]
+    *@return java.lang.String
+    **/
     public static String cutInner(String begin,String end,String str){
         int beginindex = str.indexOf(begin);
         int endindex = str.indexOf(end);
@@ -55,10 +69,18 @@ public class StringTools extends Tools{
     *@Param [list]
     *@return java.util.ArrayList<java.lang.String>
     **/
-    public static ArrayList<String> cleanBlankLine(ArrayList<String> list){
+    public static ArrayList<String> cleanBlankLine(ArrayList<String> list)
+    {
         return cleanListIs(list," ");
     }
 
+    /*
+    *@Author Tining
+    *@Description 清除list中不是str的项
+    *@Date 2019/9/26 23:53
+    *@Param [list, str]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
     public static ArrayList<String> cleanListIsNot(ArrayList<String> list, String str){
         for(int i = 0;i<list.size();i++){
             if(list.get(i).trim() != str.trim())
@@ -70,6 +92,13 @@ public class StringTools extends Tools{
         return list;
     }
 
+    /*
+    *@Author Tining
+    *@Description 清除列表中是str的项
+    *@Date 2019/9/26 23:53
+    *@Param [list, str]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
     public static ArrayList<String> cleanListIs(ArrayList<String> list, String str){
         for(int i = 0;i<list.size();i++){
             if(list.get(i).trim() == str.trim())
@@ -81,7 +110,14 @@ public class StringTools extends Tools{
         return list;
     }
 
-    public static ArrayList<String> CleanListWithou(ArrayList<String> list, String str){
+    /*
+    *@Author Tining
+    *@Description 清除list中不含有str的项
+    *@Date 2019/9/26 23:53
+    *@Param [list, str]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
+    public static ArrayList<String> cleanListWithout(ArrayList<String> list, String str){
         for(int i = 0;i<list.size();i++){
             if(!list.get(i).contains(str))
             {
@@ -92,7 +128,35 @@ public class StringTools extends Tools{
         return list;
     }
 
-    public static ArrayList<String> CleanListWith(ArrayList<String> list, String str){
+    /*
+     *@Author Tining
+     *@Description 清除list中含有str的项
+     *@Date 2019/9/27 0:39
+     *@Param [list, str]
+     *@return java.util.ArrayList<java.lang.String>
+     **/
+    public static ArrayList<String> cleanListWith(ArrayList<String> list, ArrayList<String> strlist){
+        for(int i = 0;i<list.size();i++){
+            for(int j = 0 ; j < strlist.size();j++){
+                if(list.get(i).contains(strlist.get(j)))
+                {
+                    list.remove(i);
+                    i--;break;
+                }
+            }
+
+        }
+        return list;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 清除list中含有str的项
+    *@Date 2019/9/27 0:39
+    *@Param [list, str]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
+    public static ArrayList<String> cleanListWith(ArrayList<String> list, String str){
         for(int i = 0;i<list.size();i++){
             if(list.get(i).contains(str))
             {
