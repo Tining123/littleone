@@ -19,5 +19,9 @@ public class FunctionFilter {
         //取出空值项
         get = StringTools.cleanBlankLine(get);
         //取出注释
+        ArrayList<String> clean = new ArrayList<String>();
+        clean.add("(");clean.add(")");clean.add("{");
+        get = StringTools.cleanListWithout(get,clean);
+
     }
 }

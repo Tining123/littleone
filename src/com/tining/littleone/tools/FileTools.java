@@ -105,7 +105,7 @@ public class FileTools extends Tools{
     /*
     *@Author Tining
     *@Description 重命名文件
-    *@Date 2019/9/27 0:08 
+    *@Date 2019/9/27 2:44
     *@Param [name, newName]
     *@return boolean
     **/

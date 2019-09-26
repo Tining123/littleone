@@ -113,6 +113,26 @@ public class StringTools extends Tools{
     /*
     *@Author Tining
     *@Description 清除list中不含有str的项
+    *@Date 2019/9/27 2:48 
+    *@Param [list, strlist]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
+    public static ArrayList<String> cleanListWithout(ArrayList<String> list, ArrayList<String> strlist){
+        for(int i = 0;i<list.size();i++){
+            for(int j = 0 ; j < strlist.size();j++){
+                if(!list.get(i).contains(strlist.get(j)))
+                {
+                    list.remove(i);
+                    i--;break;
+                }
+            }
+        }
+        return list;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 清除list中不含有str的项
     *@Date 2019/9/26 23:53
     *@Param [list, str]
     *@return java.util.ArrayList<java.lang.String>
@@ -144,7 +164,6 @@ public class StringTools extends Tools{
                     i--;break;
                 }
             }
-
         }
         return list;
     }
