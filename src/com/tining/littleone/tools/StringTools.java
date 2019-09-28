@@ -11,30 +11,17 @@ import java.util.ArrayList;
  **/
 public class StringTools extends Tools{
 
+    ///判断字符串互相包含
+    public static StringCompare with = (str1,str2) -> str1.contains(str2);
 
-    public static void main(String[] arg){
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        test(list,remove);
-        for(int i = 0 ; i < list.size();i++)
-            System.out.println(list.get(i));
+    ///判断字符串不互相包含
+    public static StringCompare without = (str1,str2) -> !str1.contains(str2);
 
-    }
+    ///判断字符串相等
+    public static StringCompare is = (str1, str2) -> str1.trim() == str2.trim();
 
-    public static void test(ArrayList<String> list , StringListDeal sd){
-        sd.solve(list,1);
-    }
-
-    static StringListDeal trim = (list,index) -> list.set(index,list.get(index).trim());
-    static StringListDeal remove = (list,index) -> list.remove(index);
-
-    StringCompare with = (str1,str2) -> str1.contains(str2);
-    StringCompare without = (str1,str2) -> !str1.contains(str2);
-    StringCompare is = (str1, str2) -> str1 == str2;
-    StringCompare isnot = (str1, str2) -> str1 != str2;
+    ///判断字符串互相不相等
+    public static StringCompare isnot = (str1, str2) -> str1.trim() != str2.trim();
 
     /*
     *@Author Tining
@@ -68,7 +55,7 @@ public class StringTools extends Tools{
     *@Param [list]
     *@return java.util.ArrayList<java.lang.String>
     **/
-    public static ArrayList<String> cleanList(ArrayList<String> list){
+    public static ArrayList<String> cleanListOut(ArrayList<String> list){
         list = trimList(list);
         list = cleanBlankLine(list);
         return list;
@@ -94,9 +81,8 @@ public class StringTools extends Tools{
     *@Param [list]
     *@return java.util.ArrayList<java.lang.String>
     **/
-    public static ArrayList<String> cleanBlankLine(ArrayList<String> list)
-    {
-        return cleanListIs(list," ");
+    public static ArrayList<String> cleanBlankLine(ArrayList<String> list){
+        return cleanListIs(list,"");
     }
 
     /*
@@ -107,14 +93,18 @@ public class StringTools extends Tools{
     *@return java.util.ArrayList<java.lang.String>
     **/
     public static ArrayList<String> cleanListIsNot(ArrayList<String> list, String str){
-        for(int i = 0;i<list.size();i++){
-            if(list.get(i).trim() != str.trim())
-            {
-                list.remove(i);
-                i--;
-            }
-        }
-        return list;
+        return cleanlist(list,lineToList(str),isnot);
+    }
+
+    /*
+     *@Author Tining
+     *@Description 清除list中不是str的项
+     *@Date 2019/9/26 23:53
+     *@Param [list, str]
+     *@return java.util.ArrayList<java.lang.String>
+     **/
+    public static ArrayList<String> cleanListIsNot(ArrayList<String> list, ArrayList<String> strlist){
+        return cleanlist(list,strlist,isnot);
     }
 
     /*
@@ -125,34 +115,18 @@ public class StringTools extends Tools{
     *@return java.util.ArrayList<java.lang.String>
     **/
     public static ArrayList<String> cleanListIs(ArrayList<String> list, String str){
-        for(int i = 0;i<list.size();i++){
-            if(list.get(i).trim() == str.trim())
-            {
-                list.remove(i);
-                i--;
-            }
-        }
-        return list;
+        return cleanlist(list,lineToList(str),is);
     }
 
     /*
-    *@Author Tining
-    *@Description 清除list中不含有str的项
-    *@Date 2019/9/27 2:48 
-    *@Param [list, strlist]
-    *@return java.util.ArrayList<java.lang.String>
-    **/
-    public static ArrayList<String> cleanListWithout(ArrayList<String> list, ArrayList<String> strlist){
-        for(int i = 0;i<list.size();i++){
-            for(int j = 0 ; j < strlist.size();j++){
-                if(!list.get(i).contains(strlist.get(j)))
-                {
-                    list.remove(i);
-                    i--;break;
-                }
-            }
-        }
-        return list;
+     *@Author Tining
+     *@Description 清除列表中是str的项
+     *@Date 2019/9/26 23:53
+     *@Param [list, str]
+     *@return java.util.ArrayList<java.lang.String>
+     **/
+    public static ArrayList<String> cleanListIs(ArrayList<String> list, ArrayList<String> strlist){
+        return cleanlist(list,strlist,is);
     }
 
     /*
@@ -163,14 +137,31 @@ public class StringTools extends Tools{
     *@return java.util.ArrayList<java.lang.String>
     **/
     public static ArrayList<String> cleanListWithout(ArrayList<String> list, String str){
-        for(int i = 0;i<list.size();i++){
-            if(!list.get(i).contains(str))
-            {
-                list.remove(i);
-                i--;
-            }
-        }
-        return list;
+        return cleanlist(list,lineToList(str),without);
+    }
+
+    /*
+     *@Author Tining
+     *@Description 清除list中不含有str的项
+     *@Date 2019/9/27 2:48
+     *@Param [list, strlist]
+     *@return java.util.ArrayList<java.lang.String>
+     **/
+    public static ArrayList<String> cleanListWithout(ArrayList<String> list, ArrayList<String> strlist){
+        return cleanlist(list,strlist,without);
+    }
+
+
+
+    /*
+    *@Author Tining
+    *@Description 清除list中含有str的项
+    *@Date 2019/9/27 0:39
+    *@Param [list, str]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
+    public static ArrayList<String> cleanListWith(ArrayList<String> list, String str){
+        return cleanlist(list,lineToList(str),with);
     }
 
     /*
@@ -181,34 +172,36 @@ public class StringTools extends Tools{
      *@return java.util.ArrayList<java.lang.String>
      **/
     public static ArrayList<String> cleanListWith(ArrayList<String> list, ArrayList<String> strlist){
-        for(int i = 0;i<list.size();i++){
-            for(int j = 0 ; j < strlist.size();j++){
-                if(list.get(i).contains(strlist.get(j)))
-                {
-                    list.remove(i);
-                    i--;break;
-                }
-            }
-        }
-        return list;
+        return cleanlist(list,strlist,with);
     }
 
     /*
     *@Author Tining
-    *@Description 清除list中含有str的项
-    *@Date 2019/9/27 0:39
-    *@Param [list, str]
+    *@Description 将符合条件的字段从list删除
+    *@Date 2019/9/29 2:07
+    *@Param [list1, list2, sc]
     *@return java.util.ArrayList<java.lang.String>
     **/
-    public static ArrayList<String> cleanListWith(ArrayList<String> list, String str){
-        for(int i = 0;i<list.size();i++){
-            if(list.get(i).contains(str))
-            {
-                list.remove(i);
+    public static ArrayList<String> cleanlist(ArrayList<String> list1,ArrayList<String> list2, StringCompare sc){
+        for(int i = 0 ; i< list1.size();i++){
+            for(int j =0 ; j < list2.size();j++)
+            if(sc.solve(list1.get(i),list2.get(j))){
+                list1.remove(i);
                 i--;
             }
         }
-        return list;
+        return list1;
+    }
+
+    /*
+     *@Author Tining
+     *@Description 把字符串数组按行转成转换成字符串
+     *@Date 2019/9/19 22:09
+     *@Param [String[]]
+     *@return String
+     **/
+    public static String listToLine(String[] arr){
+        return listToLine(arrayToList(arr));
     }
 
     /*
@@ -221,7 +214,6 @@ public class StringTools extends Tools{
     public static ArrayList<String> lineToList(String str){
         String[] arr = str.split("\n");
         return arrayToList(arr);
-
     }
 
     /*
@@ -242,17 +234,6 @@ public class StringTools extends Tools{
     }
 
     /*
-     *@Author Tining
-     *@Description 把字符串数组按行转成转换成字符串
-     *@Date 2019/9/19 22:09
-     *@Param [String[]]
-     *@return String
-     **/
-    public static String listToLine(String[] arr){
-        return listToLine(arrayToList(arr));
-    }
-
-    /*
     *@Author Tining
     *@Description 把数组转换成list
     *@Date 2019/9/19 22:11
@@ -266,12 +247,14 @@ public class StringTools extends Tools{
         return list;
     }
 
+    /**
+     * @InterfaceName StringCompare
+     * @Description 对于双字符串操作的函数委托
+     * @Author Tining
+     * @data 2019/9/18 0:35
+     * @Version 1.0
+     **/
     public interface StringCompare{
         boolean solve(String str1,String str2);
     }
-
-    public interface StringListDeal{
-        void solve(ArrayList<String> list, int index);
-    }
-
 }

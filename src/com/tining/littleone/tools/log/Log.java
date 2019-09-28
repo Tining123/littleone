@@ -9,19 +9,19 @@ package com.tining.littleone.tools.log;
  **/
 public abstract class Log {
     ///默认消息记录等级
-    protected int defaultLevel = 0;
+    public int defaultLevel = 0;
 
     ///默认消息规模限制
-    protected int limit = 500;
+    public int limit = 500;
 
     ///默认消息等级顺序反馈
-    protected boolean isOrderLevel = true;
+    public boolean isOrderLevel = true;
 
     ///默认消息多层反馈模式
-    protected boolean isLayerModel = true;
+    public boolean isLayerModel = true;
 
     ///默认消息反馈等级
-    protected int defaultReadLevel = 0;
+    public int defaultReadLevel = 0;
 
     /*
      *@Author Tining

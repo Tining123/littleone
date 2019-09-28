@@ -18,6 +18,27 @@ public class FileTools extends Tools{
 
     /*
     *@Author Tining
+    *@Description 获取文件大小
+    *@Date 2019/9/29 3:43 
+    *@Param [path]
+    *@return long
+    **/
+    public static long size(String path){
+        try{
+            File file = new File(path);
+            if(!file.exists())
+                return -1;
+            return file.length();
+        }catch (Exception e) {
+            if(log != null)
+                log.log(e);
+            else e.printStackTrace();
+        }
+        return -1;
+    }
+
+    /*
+    *@Author Tining
     *@Description 读取文件到字符串
     *@Date 2019/9/18 0:57
     *@Param [path]
@@ -55,7 +76,7 @@ public class FileTools extends Tools{
     *@Param [text, path]
     *@return void
     **/
-    public static boolean write(String text,String path){
+    public static boolean write(String path,String text){
         File file = new File(path);
         FileWriter fw;
         //测试文件是否存在,如果不存在则创建
@@ -79,7 +100,7 @@ public class FileTools extends Tools{
      *@Param [text, path]
      *@return void
      **/
-    public static boolean writeAppend(String text,String path){
+    public static boolean writeAppend(String path,String text,){
         File file = new File(path);
         FileWriter fw;
         BufferedWriter bw;

@@ -47,7 +47,7 @@ public class GetSetGenerator {
         String result = "";
         //字符串列表化
         ArrayList<String> list = StringTools.lineToList(str);
-        list = StringTools.cleanList(list);
+        list = StringTools.cleanListOut(list);
         //每两行为单位一次调整
         for(int i = 0 ; i < list.size();i=i+2){
             //取得属性具体描述

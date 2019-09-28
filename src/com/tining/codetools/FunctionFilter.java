@@ -24,6 +24,6 @@ public class FunctionFilter {
         get = StringTools.cleanListWithout(get,clean);
 
         //TODO
-
+        return null;
     }
 }
