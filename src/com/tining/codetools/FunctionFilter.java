@@ -23,5 +23,7 @@ public class FunctionFilter {
         clean.add("(");clean.add(")");clean.add("{");
         get = StringTools.cleanListWithout(get,clean);
 
+        //TODO
+
     }
 }

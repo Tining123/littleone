@@ -11,10 +11,35 @@ import java.util.ArrayList;
  **/
 public class StringTools extends Tools{
 
+
+    public static void main(String[] arg){
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        test(list,remove);
+        for(int i = 0 ; i < list.size();i++)
+            System.out.println(list.get(i));
+
+    }
+
+    public static void test(ArrayList<String> list , StringListDeal sd){
+        sd.solve(list,1);
+    }
+
+    static StringListDeal trim = (list,index) -> list.set(index,list.get(index).trim());
+    static StringListDeal remove = (list,index) -> list.remove(index);
+
+    StringCompare with = (str1,str2) -> str1.contains(str2);
+    StringCompare without = (str1,str2) -> !str1.contains(str2);
+    StringCompare is = (str1, str2) -> str1 == str2;
+    StringCompare isnot = (str1, str2) -> str1 != str2;
+
     /*
     *@Author Tining
     *@Description 替换掉最后一个符合的字符串
-    *@Date 2019/9/26 23:39 
+    *@Date 2019/9/26 23:39
     *@Param [text, regex, replacement]
     *@return java.lang.String
     **/
@@ -239,6 +264,14 @@ public class StringTools extends Tools{
         for(int i = 0 ; i < arr.length;i++)
             list.add(arr[i]);
         return list;
+    }
+
+    public interface StringCompare{
+        boolean solve(String str1,String str2);
+    }
+
+    public interface StringListDeal{
+        void solve(ArrayList<String> list, int index);
     }
 
 }
