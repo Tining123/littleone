@@ -11,12 +11,6 @@ import java.util.ArrayList;
  **/
 public class StringTools extends Tools{
 
-    public static void main(String[] arg){
-        Integer a = 1232;
-        Object ss = a;
-        System.out.println(ss.toString());
-    }
-
     ///判断字符串互相包含
     public static StringCompare with = (str1,str2) -> str1.contains(str2);
 

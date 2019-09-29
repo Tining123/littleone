@@ -9,7 +9,7 @@ import java.util.Random;
  * @data 2019/9/30 0:58
  * @Version 1.0
  **/
-public class MathTools {
+public class MathTools extends Tools{
 
     /*
     *@Author Tining

@@ -24,6 +24,51 @@ public abstract class Log {
     public int defaultReadLevel = 0;
 
     /*
+    *@Author Tining
+    *@Description 获取默认消息反馈等级
+    *@Date 2019/9/30 4:31 
+    *@Param []
+    *@return int
+    **/
+    public int getDefaultReadLevel(){return this.defaultReadLevel;}
+
+    /*
+    *@Author Tining
+    *@Description 设置默认消息反馈等级
+    *@Date 2019/9/30 4:30 
+    *@Param [defaultReadLevel]
+    *@return void
+    **/
+    public void setDefaultReadLevel(int defaultReadLevel){this.defaultReadLevel = defaultReadLevel;}
+
+    /*
+    *@Author Tining
+    *@Description 获取是否设置使用多层消息反馈模式
+    *@Date 2019/9/30 4:26 
+    *@Param []
+    *@return boolean
+    **/
+    public boolean getLayerModel(){return this.isLayerModel;}
+    
+    /*
+    *@Author Tining
+    *@Description 设置是否使用消息多层反馈模式
+    *@Date 2019/9/30 4:26 
+    *@Param [isLayerModel]
+    *@return boolean
+    **/
+    public void setLayerModel(Boolean isLayerModel){this.isLayerModel = isLayerModel;}
+
+    /*
+    *@Author Tining
+    *@Description 返回是否设置等级顺序反馈
+    *@Date 2019/9/30 4:24 
+    *@Param []
+    *@return boolean
+    **/
+    public boolean getOrderLevel(){return this.isOrderLevel;}
+    
+    /*
      *@Author Tining
      *@Description 设置是否等级顺序反馈
      *@Date 2019/9/19 22:32
@@ -111,7 +156,39 @@ public abstract class Log {
      *@Param [obj]
      *@return void
      **/
-    public abstract void log(String msg, int msgLevel);
+    public void log(String msg, int msgLevel){
+        if(getSize()>limit)
+            balanceSize();
+        msg = buildMessage(msg,msgLevel);
+        logAction(msg,msgLevel);
+    }
+
+    /*
+    *@Author Tining
+    *@Description 构造消息前缀
+    *@Date 2019/9/30 4:52
+    *@Param []
+    *@return java.lang.String
+    **/
+    public abstract String buildMessage(String msg, int msgLevel);
+    
+    /*
+    *@Author Tining
+    *@Description 获取日志
+    *@Date 2019/9/30 4:57 
+    *@Param []
+    *@return java.lang.String
+    **/
+    public abstract String getLog();
+    
+    /*
+    *@Author Tining
+    *@Description 日志记录执行
+    *@Date 2019/9/30 4:15 
+    *@Param [msg, msgLevel]
+    *@return void
+    **/
+    public abstract void logAction(String msg,int msgLevel);
 
     /*
      *@Author Tining
@@ -120,7 +197,7 @@ public abstract class Log {
      *@Param void
      *@return String
      **/
-    public abstract String getSize();
+    public abstract long getSize();
 
     /*
      *@Author Tining

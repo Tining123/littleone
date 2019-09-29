@@ -14,6 +14,19 @@ public class TimeTools extends Tools {
 
     /*
     *@Author Tining
+    *@Description 返回纯数字化当前时间
+    *@Date 2019/9/30 3:05 
+    *@Param []
+    *@return java.lang.String
+    **/
+    public static String getDigitNow(){
+        Date dNow = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMddhhmmss");
+        return ft.format(dNow);
+    }
+
+    /*
+    *@Author Tining
     *@Description 返回当前日期和时间
     *@Date 2019/9/26 3:33
     *@Param []
@@ -21,7 +34,7 @@ public class TimeTools extends Tools {
     **/
     public static String getNow(){
         Date dNow = new Date( );
-        SimpleDateFormat ft = new SimpleDateFormat ("yyyy/MM/dd hh:mm");
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy/MM/dd hh:mm:ss");
         return ft.format(dNow);
     }
 

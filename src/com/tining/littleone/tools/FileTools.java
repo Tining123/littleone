@@ -18,6 +18,54 @@ public class FileTools extends Tools{
 
     /*
     *@Author Tining
+    *@Description 返回文件路径
+    *@Date 2019/9/30 3:39 
+    *@Param [name]
+    *@return java.lang.String
+    **/
+    public static String path(String name){
+        try{
+            File file = new File(name);
+            if(!file.exists())
+                return "";
+            return file.getPath();
+        }catch (Exception e) {
+            if(log != null)
+                log.log(e);
+            else e.printStackTrace();
+        }
+        return "";
+    }
+
+    /*
+    *@Author Tining
+    *@Description 返回文件名，不包含后缀
+    *@Date 2019/9/30 3:38 
+    *@Param [name]
+    *@return java.lang.String
+    **/
+    public static String filename(String name){
+        if(!name.contains("."))
+            return name;
+        return name.replaceAll(filetype(name),"");
+    }
+
+    /*
+    *@Author Tining
+    *@Description 返回文件后缀名
+    *@Date 2019/9/30 3:37 
+    *@Param [name]
+    *@return java.lang.String
+    **/
+    public static String filetype(String name){
+        if(!name.contains("."))
+            return "";
+        String[] arr = name.split("\\.");
+        return arr[arr.length - 1];
+    }
+
+    /*
+    *@Author Tining
     *@Description 获取文件大小
     *@Date 2019/9/29 3:43 
     *@Param [path]

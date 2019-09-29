@@ -1,5 +1,6 @@
 package com.tining.littleone.tools;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +12,44 @@ import java.util.regex.Pattern;
  * @data 2019/9/18 0:35
  * @Version 1.0
  **/
-public class RegexTools {
+public class RegexTools extends Tools{
+    
+    /*
+    *@Author Tining
+    *@Description 返回文件后缀
+    *@Date 2019/9/30 4:59
+    *@Param [filename]
+    *@return java.lang.String
+    **/
+    public static String getFileType(String filename){
+        String prefix = "(.+//)?.([a-zA-z0-9]+)$";
+        return getRegex(prefix,filename);
+    }
+
+
+    /*
+    *@Author Tining
+    *@Description 判断字符串是否以特定结束
+    *@Date 2019/9/30 2:48 
+    *@Param [end, str]
+    *@return boolean
+    **/
+    public static boolean findEnd(String end,String str){
+        String prefix = str + "$";
+        return findRegex(prefix,str);
+    }
+
+    /*
+    *@Author Tining
+    *@Description 判断字符串是否以特定开头
+    *@Date 2019/9/30 2:47 
+    *@Param [begin, str]
+    *@return boolean
+    **/
+    public static boolean findBegin(String begin, String str){
+        String prefix="^" +begin;
+        return findRegex(prefix,str);
+    }
 
     /*
     *@Author Tining
@@ -235,13 +273,40 @@ public class RegexTools {
 
     /*
     *@Author Tining
+    *@Description 获取字符串中符合正则表达式的字段
+    *@Date 2019/9/30 3:17 
+    *@Param [patternStr, str]
+    *@return java.lang.String
+    **/
+    public static String getRegex(String patternStr,String str){
+        Pattern pattern = Pattern.compile(patternStr);
+        Matcher matcher = pattern.matcher(str);
+        matcher.find();
+        return matcher.group();
+    }
+
+    /*
+    *@Author Tining
+    *@Description 判断字符串是否符合正则表达式
+    *@Date 2019/9/30 2:45 
+    *@Param [patternStr, str]
+    *@return boolean
+    **/
+    public static boolean findRegex(String patternStr,String str){
+        Pattern pattern = Pattern.compile(patternStr);
+        Matcher matcher = pattern.matcher(str);
+        return matcher.find();
+    }
+
+    /*
+    *@Author Tining
     *@Description 返回符合正则表达式的内容
     *@Date 2019/9/27 0:03 
     *@Param [patten, str]
     *@return java.util.ArrayList<java.lang.String>
     **/
-    public static ArrayList<String> matchRegex(String patten,String str){
-        Pattern pattern = Pattern.compile(patten);
+    public static ArrayList<String> matchRegex(String patternStr,String str){
+        Pattern pattern = Pattern.compile(patternStr);
         Matcher matcher = pattern.matcher(str);
         ArrayList<String> list = new ArrayList<>();
         while (matcher.find())
