@@ -17,8 +17,15 @@ public class FileLog extends Log {
     ///默认存储文件路径
     public String defaultPath = "log.txt";
 
+    ///文件大小乘积倍数基数
+    public int sizebase = 1024;
+
     @Override
     public void log(String msg, int msgLevel) {
+        //检测文件大小是否过大
+        if(getSize().length() > limit * sizebase){
+            //如果过大则修改文件名
+        }
         FileTools.writeAppend(defaultPath,msg);
     }
 

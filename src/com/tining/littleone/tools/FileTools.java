@@ -100,7 +100,7 @@ public class FileTools extends Tools{
      *@Param [text, path]
      *@return void
      **/
-    public static boolean writeAppend(String path,String text,){
+    public static boolean writeAppend(String path,String text){
         File file = new File(path);
         FileWriter fw;
         BufferedWriter bw;

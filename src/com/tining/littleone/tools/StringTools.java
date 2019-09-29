@@ -11,6 +11,12 @@ import java.util.ArrayList;
  **/
 public class StringTools extends Tools{
 
+    public static void main(String[] arg){
+        Integer a = 1232;
+        Object ss = a;
+        System.out.println(ss.toString());
+    }
+
     ///判断字符串互相包含
     public static StringCompare with = (str1,str2) -> str1.contains(str2);
 
@@ -22,6 +28,163 @@ public class StringTools extends Tools{
 
     ///判断字符串互相不相等
     public static StringCompare isnot = (str1, str2) -> str1.trim() != str2.trim();
+
+    /*
+    *@Author Tining
+    *@Description 把其他类型list转换成字符串列表
+    *@Date 2019/9/30 1:35 
+    *@Param [list]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
+    public static ArrayList<String> turnListToString(ArrayList<Object> list){
+        ArrayList<String> temp = new ArrayList<String>();
+        for(int i = 0 ; i < list.size();i++){
+            temp.add(list.get(i).toString());
+        }
+        return temp;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 把list转换成小数list
+    *@Date 2019/9/30 1:31
+    *@Param [list]
+    *@return java.util.ArrayList<java.lang.Double>
+    **/
+    public static ArrayList<Double> turnListToDouble(ArrayList<String> list){
+        ArrayList<Double> temp = new ArrayList<Double>();
+        for(int i = 0 ; i < list.size();i++){
+            temp.add(Double.parseDouble(list.get(i)));
+        }
+        return temp;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 把list转换成整数list
+    *@Date 2019/9/30 1:30 
+    *@Param [list]
+    *@return java.util.ArrayList<java.lang.Integer>
+    **/
+    public static ArrayList<Integer> turnListToInt(ArrayList<String> list){
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+        for(int i = 0 ; i < list.size();i++){
+            temp.add(Integer.parseInt(list.get(i)));
+        }
+        return temp;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 转置表
+    *@Date 2019/9/30 2:23 
+    *@Param [table]
+    *@return java.util.ArrayList<java.util.ArrayList<java.lang.String>>
+    **/
+    public static ArrayList<ArrayList<String>> reverseTable(ArrayList<ArrayList<String>> table){
+        if(!isTableInteger(table))
+            return null;
+        int Y = table.size();
+        int X = table.get(0).size();
+        if(isTableSquare(table)){
+            return listToTable(tableToList(table),X,Y);
+        }
+        return listToTable(tableToList(table),X,Y,true);
+    }
+
+    /*
+    *@Author Tining
+    *@Description 返回表是否为正方形
+    *@Date 2019/9/30 2:01 
+    *@Param [table]
+    *@return boolean
+    **/
+    public static boolean isTableSquare(ArrayList<ArrayList<String>> table){
+        if(!isTableInteger(table)){
+            return false;
+        }
+        if(table.size() != table.get(0).size()){
+            return false;
+        }
+
+        return true;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 测试表的每一行是否对其饱满
+    *@Date 2019/9/30 1:43
+    *@Param [table]
+    *@return boolean
+    **/
+    public static boolean isTableInteger(ArrayList<ArrayList<String>> table){
+        if(table.size() == 0)
+            return false;
+        int size = table.get(0).size();
+        for(int i = 1;i< table.size();i++){
+            if(table.get(i).size() != size)
+                return false;
+            size = table.get(i).size();
+        }
+        return true;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 将表转换为list
+    *@Date 2019/9/30 1:27 
+    *@Param [table]
+    *@return java.util.ArrayList<java.lang.String>
+    **/
+    public static ArrayList<String> tableToList(ArrayList<ArrayList<String>> table){
+        ArrayList<String> list = new ArrayList<String>();
+        for(int i = 0; i < table.size();i++){
+            for(int j = 0 ;j<table.get(i).size();j++){
+                list.add(table.get(i).get(j));
+            }
+        }
+        return list;
+    }
+
+    /*
+    *@Author Tining
+    *@Description list转换为表，但Y轴优先
+    *@Date 2019/9/30 2:11 
+    *@Param [list, X, Y, linePremier]
+    *@return java.util.ArrayList<java.util.ArrayList<java.lang.String>>
+    **/
+    public static ArrayList<ArrayList<String>> listToTable(ArrayList<String> list,int X, int Y, boolean YPremier){
+        ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+        int index = 0;
+        for(int i = 0 ; i<X;i++)
+            table.add(new ArrayList<String>());
+        for(int i = 0 ;index<list.size();i++){
+            table.get(i%X).add(list.get(index));
+            index++;
+        }
+        return table;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 将list转换为表
+    *@Date 2019/9/30 1:24 
+    *@Param [list, X, Y]
+    *@return java.util.ArrayList<java.util.ArrayList<java.lang.String>>
+    **/
+    public static ArrayList<ArrayList<String>> listToTable(ArrayList<String> list,int X, int Y){
+        ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+        int index = 0;
+        for(int i = 0;i<X&&index < list.size();i++){
+            ArrayList<String> temp = new ArrayList<String>();
+            for(int j = 0 ;j<Y && index<list.size();j++){
+                temp.add(list.get(index));
+                index++;
+            }
+            table.add(temp);
+        }
+        return table;
+    }
 
     /*
     *@Author Tining
@@ -257,4 +420,5 @@ public class StringTools extends Tools{
     public interface StringCompare{
         boolean solve(String str1,String str2);
     }
+
 }
