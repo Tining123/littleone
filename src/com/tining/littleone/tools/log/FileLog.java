@@ -71,7 +71,7 @@ public class FileLog extends Log {
     *@return void
     **/
     @Override
-    public void balanceSize() {
+    public void balanceSize(String msg,int msgLevel) {
         //如果过大则修改文件名
         //构建文件名
         String innerfix = TimeTools.getDigitNow() + MathTools.getRandomInt(1000,9999);

@@ -1,12 +1,13 @@
 package com.tining.littleone.tools.log;
 
+import com.tining.littleone.tools.StringTools;
 import com.tining.littleone.tools.TimeTools;
 
 import java.util.ArrayList;
 
 /**
  * @ClassName QueueLog
- * @Description TODO
+ * @Description 消息队列型日志
  * @Author Tining
  * @data 2019/9/30 4:22
  * @Version 1.0
@@ -15,18 +16,6 @@ public class QueueLog extends Log{
 
     ///日志载体列表
     ArrayList<String> logList = new ArrayList<>();
-    
-    /*
-    *@Author Tining
-    *@Description 构造前缀
-    *@Date 2019/9/30 5:00 
-    *@Param []
-    *@return java.lang.String
-    **/
-    @Override
-    public String buildPrefix() {
-        return TimeTools.getNow() + "|";
-    }
 
     /*
     *@Author Tining
@@ -37,7 +26,7 @@ public class QueueLog extends Log{
     **/
     @Override
     public String getLog() {
-        return null;
+        return StringTools.listToLine(logList);
     }
 
     /*
@@ -61,7 +50,7 @@ public class QueueLog extends Log{
     **/
     @Override
     public long getSize() {
-        return 0;
+        return logList.size();
     }
 
     /*
@@ -72,7 +61,9 @@ public class QueueLog extends Log{
     *@return void
     **/
     @Override
-    public void balanceSize() {
-
+    public void balanceSize(String msg,int msgLevel) {
+        if(logList.size() <= 0)
+            return;
+        logList.remove(0);
     }
 }

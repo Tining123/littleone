@@ -1,5 +1,9 @@
 package com.tining.littleone.tools.log;
 
+import com.tining.littleone.tools.TimeTools;
+
+import java.sql.Time;
+
 /**
  * @ClassName FileTools
  * @Description 针对于字符串操作的工具类
@@ -8,6 +12,16 @@ package com.tining.littleone.tools.log;
  * @Version 1.0
  **/
 public abstract class Log {
+
+    ///判断消息等级相等
+    public MsgLevelCompare equal = (msgLevel ,defaultLevel) -> msgLevel == defaultLevel;
+
+    ///判断消息等级高于
+    public MsgLevelCompare higherthan = (msgLevel ,defaultLevel) -> msgLevel >= defaultLevel;
+
+    ///判断消息等级低于
+    public MsgLevelCompare lowerthan = (msgLevel ,defaultLevel) -> msgLevel <= defaultLevel;
+
     ///默认消息记录等级
     public int defaultLevel = 0;
 
@@ -22,6 +36,27 @@ public abstract class Log {
 
     ///默认消息反馈等级
     public int defaultReadLevel = 0;
+
+    ///最新日志时间戳
+    public String logTimeIndex = "";
+    
+    /*
+    *@Author Tining
+    *@Description 获取最新日志时间戳
+    *@Date 2019/9/30 7:26 
+    *@Param []
+    *@return java.lang.String
+    **/
+    public String getLogTimeIndex(){return this.logTimeIndex;}
+    
+    /*
+    *@Author Tining
+    *@Description 设置最新日志时间戳
+    *@Date 2019/9/30 7:25 
+    *@Param [logTimeIndex]
+    *@return void
+    **/
+    public void setLogTimeIndex(String logTimeIndex){this.logTimeIndex = logTimeIndex;}
 
     /*
     *@Author Tining
@@ -157,10 +192,34 @@ public abstract class Log {
      *@return void
      **/
     public void log(String msg, int msgLevel){
+        String timeIndex = TimeTools.getNow();
+        logTimeIndex = timeIndex;
+        msg = buildMessage(msg,msgLevel,timeIndex);
+        if(!msgPass(msgLevel)){
+            System.out.println(msg);
+            return;
+        }
         if(getSize()>limit)
-            balanceSize();
-        msg = buildMessage(msg,msgLevel);
+            balanceSize(msg,msgLevel);
         logAction(msg,msgLevel);
+    }
+
+    /*
+    *@Author Tining
+    *@Description 消息过滤函数
+    *@Date 2019/9/30 7:11 
+    *@Param [msgLevel]
+    *@return boolean
+    **/
+    public boolean msgPass(int msgLevel){
+        MsgLevelCompare mlc = equal;
+        if(isLayerModel)
+            mlc = equal;
+        else if(isOrderLevel)
+            mlc = lowerthan;
+        else mlc = higherthan;
+
+        return mlc.levelSolve(msgLevel,defaultLevel);
     }
 
     /*
@@ -170,7 +229,10 @@ public abstract class Log {
     *@Param []
     *@return java.lang.String
     **/
-    public abstract String buildMessage(String msg, int msgLevel);
+    public String buildMessage(String msg, int msgLevel, String timeStr){
+        String result = timeStr + "|level " + msgLevel + "|" + msg;
+        return result;
+    }
     
     /*
     *@Author Tining
@@ -206,5 +268,23 @@ public abstract class Log {
      *@Param void
      *@return void
      **/
-    public abstract void balanceSize();
+    public abstract void balanceSize(String msg, int msgLevel);
+
+    /**
+     * @InterfaceName MsgCompare
+     * @Description 针对于消息等级过滤操作
+     * @Author Tining
+     * @data 2019/9/18 0:35
+     * @Version 1.0
+     **/
+    public interface MsgLevelCompare{
+        /*
+        *@Author Tining
+        *@Description 等级操作函数
+        *@Date 2019/9/30 7:01 
+        *@Param [msgLevel]
+        *@return boolean
+        **/
+        boolean levelSolve(int msgLevel, int defaultLevel);
+    }
 }

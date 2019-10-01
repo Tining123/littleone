@@ -308,8 +308,6 @@ public class StringTools extends Tools{
         return cleanlist(list,strlist,without);
     }
 
-
-
     /*
     *@Author Tining
     *@Description 清除list中含有str的项
@@ -402,6 +400,19 @@ public class StringTools extends Tools{
         for(int i = 0 ; i < arr.length;i++)
             list.add(arr[i]);
         return list;
+    }
+
+    /*
+    *@Author Tining
+    *@Description 返回字符串是否为空
+    *@Date 2019/9/30 8:00 
+    *@Param [str]
+    *@return boolean
+    **/
+    public static boolean isStringEmpty(String str){
+        if(str.trim().length() == 0)
+            return true;
+        return false;
     }
 
     /**

@@ -33,6 +33,8 @@ public class GetSetGenerator {
                 "\n" +
                 "    ///默认消息反馈等级\n" +
                 "    protected int defaultReadLevel = 0;";
+        get="///存储日志的字符串\n" +
+                "    public String logString = \"\";";
         System.out.println(generateGS(get));
     }
 
@@ -93,7 +95,7 @@ public class GetSetGenerator {
                 "**/";
         //先构造取出器Get
         result = preix + result;
-        result += "public " + type + " get"+ upfirst +"()" + "\n{return this."+originName+";}" +"\n";
+        result += "public " + type + " get"+ name +"()" + "{return this."+originName+";}" +"\n";
         result += "\n";
         //构造设置器
         preix = "/*\n" +
@@ -103,7 +105,10 @@ public class GetSetGenerator {
                 "*@Param " + type + "\n" +
                 "*@return void\n" +
                 "**/";
-        result += "public " + type + " set"+ upfirst +"("+ type + " " + name + ")" + "\n{this."+originName+" = "+originName+";}" +"\n";
+
+        result = result + preix;
+        result += "\n";
+        result += "public void set"+ name +"("+ type + " " + originName + ")" + "{this."+originName+" = "+originName+";}" +"\n";
         result += "\n";
         return result;
     }
