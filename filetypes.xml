@@ -2,13 +2,13 @@
   <component name="FileTypeManager" version="17">
     <extensionMap>
       <mapping pattern="SQL基本能力考查-分组排序" type="PLAIN_TEXT" />
-      <mapping pattern="SQL基本操作：数据列转行，添加排名" type="PLAIN_TEXT" />
+      <mapping pattern="SQL综合应用" type="PLAIN_TEXT" />
       <mapping pattern="SQL基础" type="PLAIN_TEXT" />
+      <mapping pattern="SQL基本操作：数据列转行，添加排名" type="PLAIN_TEXT" />
       <mapping pattern="SQL基本操作：数据累加" type="PLAIN_TEXT" />
       <mapping pattern="asds" type="PLAIN_TEXT" />
       <mapping pattern="玩儿玩儿玩儿" type="PLAIN_TEXT" />
       <mapping pattern="sadad" type="PLAIN_TEXT" />
-      <mapping pattern="SQL综合应用" type="PLAIN_TEXT" />
       <removed_mapping ext="log" approved="true" type="PLAIN_TEXT" />
       <removed_mapping ext="bat" approved="true" type="PLAIN_TEXT" />
       <removed_mapping ext="cmd" approved="true" type="PLAIN_TEXT" />
